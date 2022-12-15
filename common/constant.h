@@ -9,4 +9,8 @@
 enum COMMOND{
     CMD_LS=0,CMD_CD,CMD_PUT,CMD_GET,CMD_QUIT
 };
+// COMMAND枚举类型转成对应的控制台输入的字符串命令
+char* cmd_to_str(enum COMMOND cmd);
+// 控制台输入的字符串命令转成对应的COMMAND枚举类型
+enum COMMOND str_to_cmd(char* str);
 #endif //SIMPLEFTP_CONSTANT_H
