@@ -59,6 +59,7 @@ int main(int argc,char *argv[]){
                 break;
             case CMD_QUIT:
                 send_cmd_quit(socketfd);
+                close(socketfd);
                 return 0;
         }
     }
