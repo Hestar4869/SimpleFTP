@@ -6,9 +6,12 @@
 #include <stdio.h>
 #include <sys/socket.h>
 #include <unistd.h>
+#include <time.h>
 #include "transfer_file.h"
 
 void upload(int socketfd, char *filename) {
+    clock_t start=clock(),end;
+
     FILE *fp;
     fp = fopen(filename,"rb");
 
@@ -21,10 +24,13 @@ void upload(int socketfd, char *filename) {
     }
     printf("总共上传%d字节，约%dMb\n",file_size,file_size/1024/1024);
 
+    end = clock();
+    printf("所用时间为%.2fms\n",(double )(end-start)/CLOCKS_PER_SEC*1000);
     fclose(fp);
 }
 
 void download(int socketfd, char *filename) {
+    clock_t start=clock(),end;
     FILE *fp;
     fp = fopen(filename,"wb");
 
@@ -32,11 +38,13 @@ void download(int socketfd, char *filename) {
     int file_size=0,len=0;
     while ((len = recv(socketfd,buffer,sizeof (buffer),0))>0){
         file_size += len;
-        fwrite(buffer,sizeof (buffer),len,fp);
+        fwrite(buffer,sizeof (char),len,fp);
 
         // recv()函数是阻塞式的，如果len不是1024则说明已经读取完毕
         if(len != 1024) break;
     }
     printf("总共下载文件%d字节，约%dMB\n",file_size,file_size/1024/1024);
+    end = clock();
+    printf("所用时间为%.2fms\n",(double )(end-start)/CLOCKS_PER_SEC*1000);
     fclose(fp);
 }

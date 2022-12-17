@@ -7,7 +7,6 @@
 #include <malloc.h>
 #include <unistd.h>
 #include <string.h>
-#include "ftp_server.h"
 #include "server_util.h"
 #include "../common/constant.h"
 
@@ -16,6 +15,7 @@
 // pid_num存储当前存活的线程数，alive[]用于标记可用的存储空间
 pthread_t pid_list[MAX_PID_NUM];
 int  pid_num,alive[MAX_PID_NUM];
+
 //! 连接每个客户端的子线程主函数
 void *pthread_main(int* socketfd);
 
@@ -49,7 +49,7 @@ int main(){
 }
 
 void *pthread_main(int* socketfd){
-    // 初始化该线程的共用的工作路径
+    // 初始化该线程的工作路径
     char current_path[128];
     memset(current_path,0,sizeof (current_path));
     strcpy(current_path,"/home/hestar");

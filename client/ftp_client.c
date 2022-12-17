@@ -5,7 +5,6 @@
 #include <stdlib.h>
 #include <sys/socket.h>
 #include <unistd.h>
-#include "ftp_client.h"
 #include "client_util.h"
 
 int main(int argc,char *argv[]){

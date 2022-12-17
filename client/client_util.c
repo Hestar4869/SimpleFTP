@@ -90,7 +90,7 @@ int send_cmd_put(int socketfd) {
     scanf("%s %s",local_file,remote_file);
     // 检测本地文件是否存在
     if(access(local_file,0)) {
-        printf("本地文件%s不存在", local_file);
+        printf("本地文件%s不存在\n", local_file);
         return -1;
     }
 

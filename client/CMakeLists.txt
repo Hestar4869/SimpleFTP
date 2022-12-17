@@ -1,1 +1,0 @@
-add_executable(ftp ftp_client.c)
