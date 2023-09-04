@@ -5,6 +5,7 @@
 
 #ifndef SIMPLEFTP_TRANSFER_FILE_H
 #define SIMPLEFTP_TRANSFER_FILE_H
+
 // 从本地传输到远端socket
 void upload(int socketfd,char* filename);
 

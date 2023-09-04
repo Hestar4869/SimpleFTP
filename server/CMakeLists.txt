@@ -1,1 +1,1 @@
-add_executable(ftp_server ftp_server.c)
+add_executable(ftp_server ftp_server.cpp)

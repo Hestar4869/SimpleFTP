@@ -15,7 +15,7 @@
 #include "../common/constant.h"
 #include "../common/transfer_file.h"
 
-
+// 创建并返回listen_socket
 int create_listen_server() {
     int listen_socket = socket(AF_INET, SOCK_STREAM, 0);
     if (listen_socket == -1) {
@@ -52,7 +52,7 @@ int create_listen_server() {
     }
     return listen_socket;
 }
-
+// 根据传入的listen_socket,返回一个已建立连接的socketfd
 int wait_client(int listen_socket) {
     struct sockaddr_in cliaddr;
     int addrlen = sizeof(cliaddr);
@@ -69,6 +69,7 @@ int wait_client(int listen_socket) {
     return client_socket;
 }
 
+// 执行ls命令
 void execute_cmd_ls(int socketfd,char* current_path) {
     char buffer[1024];
     int buffer_len=0;
@@ -90,7 +91,7 @@ void execute_cmd_ls(int socketfd,char* current_path) {
     send(socketfd,buffer, buffer_len+1,0);
     closedir(dirfd);
 }
-
+// 执行cd命令
 void execute_cmd_cd(int socketfd, char *current_path) {
     char newpath[128];
     int newpath_len=0;
@@ -112,7 +113,7 @@ void execute_cmd_cd(int socketfd, char *current_path) {
     // 将新路径的信息传输回给客户端
     send(socketfd,current_path,128,0);
 }
-
+// 执行put命令
 void execute_cmd_put(int socketfd) {
     // 接收客户端传输过来的文件名
     char filename[128];
@@ -131,7 +132,7 @@ void execute_cmd_put(int socketfd) {
 
     download(socketfd,filename);
 }
-
+// 执行get命令
 void execute_cmd_get(int socketfd) {
     char filename[128];
     recv(socketfd,filename,128,0);
